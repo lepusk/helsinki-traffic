@@ -1,16 +1,19 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var MeasurementConstants = require('../constants/MeasurementConstants');
+var MeasurementQueries = require('../data/MeasurementQueries');
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
 
-var measurements = window.trafficData || {};
+var trafficData = window.trafficData || {};
 var selectedHour = 12;
 
 var CHANGE_EVENT = 'change';
 
 var MeasurementStore = assign({}, EventEmitter.prototype, {
-  getMeasurements: function() {
-    return measurements;
+  getMeasurementsOfHour: function() {
+    var measurementsOfHour = MeasurementQueries.selectMeasurementsByHour(selectedHour, trafficData);
+    console.log('fetched measurements', selectedHour, measurementsOfHour);
+    return measurementsOfHour;
   },
 
   getSelectedHour: function() {

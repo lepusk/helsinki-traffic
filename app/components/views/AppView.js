@@ -32,7 +32,7 @@ var AppView = React.createClass({
 
 function getAppState() {
   return {
-    measurements: MeasurementStore.getMeasurements(),
+    measurements: MeasurementStore.getMeasurementsOfHour(),
     selectedHour: MeasurementStore.getSelectedHour()
   };
 }
