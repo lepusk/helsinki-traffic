@@ -1,8 +1,6 @@
 var _ = require('lodash');
 
-var MeasurementQueries = {};
-
-MeasurementQueries.selectMeasurementsByHour = function(hour, data) {
+function selectMeasurementsByHour(hour, data) {
   var selectedMeasurements = {};
   _.each(data, function(measurements, measurementPoint) {
     selectedMeasurements[measurementPoint] = _.filter(measurements, function(measurement) {
@@ -10,14 +8,14 @@ MeasurementQueries.selectMeasurementsByHour = function(hour, data) {
     });
   });
   return selectedMeasurements;
-};
+}
 
-MeasurementQueries.selectMeasurementsByMeasurementPoint = function(measurementPoint, data) {
+function selectMeasurementsByMeasurementPoint(measurementPoint, data) {
   var measurements = data[measurementPoint];
   return measurements ? measurements : [];
 }
 
-MeasurementQueries.getCoordinates = function(measurementPoint, coordinatesData) {
+function getCoordinates(measurementPoint, coordinatesData) {
   var foundCoordinates = _.find(coordinatesData, function(coordinates) {
     return coordinates.measurementPoint === measurementPoint;
   });
@@ -28,6 +26,10 @@ MeasurementQueries.getCoordinates = function(measurementPoint, coordinatesData) 
     };
   }
   return {};
-};
+}
 
-module.exports = MeasurementQueries;
+module.exports = {
+  selectMeasurementsByHour: selectMeasurementsByHour,
+  selectMeasurementsByMeasurementPoint: selectMeasurementsByMeasurementPoint,
+  getCoordinates: getCoordinates
+};
