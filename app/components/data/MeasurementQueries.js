@@ -17,4 +17,17 @@ MeasurementQueries.selectMeasurementsByMeasurementPoint = function(measurementPo
   return measurements ? measurements : [];
 }
 
+MeasurementQueries.getCoordinates = function(measurementPoint, coordinatesData) {
+  var foundCoordinates = _.find(coordinatesData, function(coordinates) {
+    return coordinates.measurementPoint === measurementPoint;
+  });
+  if (foundCoordinates) {
+    return {
+      lat: foundCoordinates.lat,
+      lon: foundCoordinates.lon
+    };
+  }
+  return {};
+};
+
 module.exports = MeasurementQueries;

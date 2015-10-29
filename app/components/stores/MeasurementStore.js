@@ -5,6 +5,7 @@ var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
 
 var trafficData = window.trafficData || {};
+var coordinatesData = window.coordinatesData || {};
 var selectedHour = 12;
 
 var CHANGE_EVENT = 'change';
@@ -18,6 +19,11 @@ var MeasurementStore = assign({}, EventEmitter.prototype, {
 
   getSelectedHour: function() {
     return selectedHour;
+  },
+
+  getCoordinates: function() {
+    console.log('getting coordinates', coordinatesData);
+    return coordinatesData;
   },
 
   emitChange: function() {

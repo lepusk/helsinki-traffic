@@ -35,7 +35,8 @@ var AppView = React.createClass({
 function getAppState() {
   return {
     measurements: MeasurementStore.getMeasurementsOfHour(),
-    selectedHour: MeasurementStore.getSelectedHour()
+    selectedHour: MeasurementStore.getSelectedHour(),
+    coordinates: MeasurementStore.getCoordinates()
   };
 }
 

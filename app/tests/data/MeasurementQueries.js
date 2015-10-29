@@ -41,6 +41,28 @@ describe('select measurements by measurement point', function() {
   });
 });
 
+describe('get coordinates of measurement point', function() {
+  var measurementPoint;
+
+  describe('and coordinates exists', function() {
+    it('coordinates are returned', function() {
+      measurementPoint = 'A02';
+      var coordinates = MeasurementQueries.getCoordinates(measurementPoint, coordinatesData);
+      expect(coordinates.lat).to.equals(60.16709052);
+      expect(coordinates.lon).to.equals(24.90235664);
+    });
+  });
+
+  describe('and coordinates not exists', function() {
+    it('lat and lon coordinates are undefined', function() {
+      measurementPoint = 'A023434';
+      var coordinates = MeasurementQueries.getCoordinates(measurementPoint, coordinatesData);
+      expect(coordinates.lat).to.be.undefined;
+      expect(coordinates.lon).to.be.undefined;
+    });
+  });
+});
+
 var data = {
   "D10": [
     {
@@ -135,3 +157,18 @@ var data = {
     } 
   ]
 };
+
+var coordinatesData = [
+  {
+    measurementPoint: 'A01',
+    name: 'LAUTTASAAREN SILTA',
+    lon: 24.89961514,
+    lat: 60.16238533
+  },
+  {
+    measurementPoint: 'A02',
+    name: 'LAPINLAHDEN SILTA',
+    lon: 24.90235664,
+    lat: 60.16709052
+  }
+];
