@@ -3,6 +3,7 @@
 
 # js
 node_modules/
-app/public/js/*
+app/public/js/app.js
+
 
 

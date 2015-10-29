@@ -3,12 +3,14 @@ var MeasurementStore = require('../stores/MeasurementStore');
 var _ = require('lodash');
 
 var SelectHourView = require('./SelectHourView');
+var MapView = require('./MapView');
 
 var AppView = React.createClass({
   render: function() {
     return (
       <div className="content">
         <SelectHourView selectedHour={this.state.selectedHour} />
+        <MapView />
       </div>
     );
   },
