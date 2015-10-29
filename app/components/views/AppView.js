@@ -10,7 +10,10 @@ var AppView = React.createClass({
     return (
       <div className="content">
         <SelectHourView selectedHour={this.state.selectedHour} />
-        <MapView />
+        <MapView 
+          measurements={this.state.measurements} 
+          coordinates={this.state.coordinates}
+          measurementPoints={this.state.measurementPoints} />
       </div>
     );
   },
@@ -36,7 +39,8 @@ function getAppState() {
   return {
     measurements: MeasurementStore.getMeasurementsOfHour(),
     selectedHour: MeasurementStore.getSelectedHour(),
-    coordinates: MeasurementStore.getCoordinates()
+    coordinates: MeasurementStore.getCoordinates(),
+    measurementPoints: MeasurementStore.getMeasurementPoints()
   };
 }
 

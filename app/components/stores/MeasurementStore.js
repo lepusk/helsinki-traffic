@@ -7,6 +7,8 @@ var assign = require('object-assign');
 var trafficData = window.trafficData || {};
 var coordinatesData = window.coordinatesData || {};
 var selectedHour = 12;
+var measurementPoints = ['A01', 'A02', 'A04', 'A05', 'A07', 'A08', 'A09', 'B01', 'B02', 'B03', 'B04',
+                          'B05', 'B06', 'B07', 'B08', 'B09', 'B10', 'B12', 'C02', 'C03'];
 
 var CHANGE_EVENT = 'change';
 
@@ -24,6 +26,11 @@ var MeasurementStore = assign({}, EventEmitter.prototype, {
   getCoordinates: function() {
     console.log('getting coordinates', coordinatesData);
     return coordinatesData;
+  },
+
+  getMeasurementPoints: function() {
+    console.log('getting measurement points', measurementPoints);
+    return measurementPoints;
   },
 
   emitChange: function() {

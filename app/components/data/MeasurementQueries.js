@@ -10,7 +10,7 @@ function selectMeasurementsByHour(hour, data) {
   return selectedMeasurements;
 }
 
-function selectMeasurementsByMeasurementPoint(measurementPoint, data) {
+function getMeasurements(measurementPoint, data) {
   var measurements = data[measurementPoint];
   return measurements ? measurements : [];
 }
@@ -30,6 +30,6 @@ function getCoordinates(measurementPoint, coordinatesData) {
 
 module.exports = {
   selectMeasurementsByHour: selectMeasurementsByHour,
-  selectMeasurementsByMeasurementPoint: selectMeasurementsByMeasurementPoint,
+  getMeasurements: getMeasurements,
   getCoordinates: getCoordinates
 };

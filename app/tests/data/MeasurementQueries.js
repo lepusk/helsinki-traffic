@@ -17,13 +17,13 @@ describe('select measurements by hour', function() {
   });
 });
 
-describe('select measurements by measurement point', function() {
+describe('get measurements of measurement point', function() {
   var measurementPoint;
 
   describe('and measurement point exists', function() {
     it('returns only measurements of given measurement point', function() {
       measurementPoint = 'D10';
-      measurements = MeasurementQueries.selectMeasurementsByMeasurementPoint(measurementPoint, data);
+      measurements = MeasurementQueries.getMeasurements(measurementPoint, data);
       expect(measurements.length).to.equals(4);
       expect(measurements[0]['total']).to.equals(71);
       expect(measurements[1]['total']).to.equals(54);
@@ -35,7 +35,7 @@ describe('select measurements by measurement point', function() {
   describe('and measurement point not exists', function() {
     it('returns empty array', function() {
       measurementPoint = 'D1111';
-      measurements = MeasurementQueries.selectMeasurementsByMeasurementPoint(measurementPoint, data);
+      measurements = MeasurementQueries.getMeasurements(measurementPoint, data);
       expect(measurements.length).to.equals(0);
     });
   });

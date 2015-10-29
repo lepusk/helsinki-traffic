@@ -1,4 +1,7 @@
 var React = require('react');
+var _ = require('lodash');
+var MeasurementQueries = require('../data/MeasurementQueries');
+var MapData = require('../data/MapData');
 
 var trafficMap;
 var trafficMapPoints;
@@ -13,6 +16,19 @@ var MapView = React.createClass({
 
   componentDidMount: function() {
     this.createMap();
+    this.populateCoordinates();
+    this.drawCityCenter();
+  },
+
+  populateCoordinates: function() {
+    var self = this;
+    trafficMapPoints.clearLayers();
+    _.each(this.props.measurementPoints, function(measurementPoint) {
+      var measurements = MeasurementQueries.getMeasurements(measurementPoint, self.props.measurements);
+      var coordinates = MeasurementQueries.getCoordinates(measurementPoint, self.props.coordinates);
+      var circleData = MapData.createCircleData(measurements, coordinates);
+      self.drawCircle(circleData.lat, circleData.lon, 'red', null);
+    });
   },
 
   createMap: function() {
@@ -25,7 +41,22 @@ var MapView = React.createClass({
       ext: 'png'
     }).addTo(trafficMap);
     trafficMapPoints = new L.LayerGroup().addTo(trafficMap);
+
     console.log('Map initialized', trafficMap, trafficMapPoints);
+  },
+
+  drawCityCenter: function() {
+    this.drawCircle(60.17038939, 24.94100461, 'rgb(145,207,96)', null);
+  },
+
+  drawCircle: function(lat, lon, fillColor, borderColor) {
+    var circleRadius = 150;
+    var mapOptions = {
+      fillOpacity: 0.8,
+      fillColor: fillColor,
+      color: borderColor
+    };
+    return L.circle([lat, lon], 150, mapOptions).addTo(trafficMapPoints);
   }
 });
 
