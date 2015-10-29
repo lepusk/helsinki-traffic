@@ -4,7 +4,7 @@ var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
 
 var measurements = window.trafficData || {};
-var selectedHour = 2;
+var selectedHour = 12;
 
 var CHANGE_EVENT = 'change';
 
