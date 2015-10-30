@@ -7,10 +7,12 @@ var hours = _.range(0,24);
 var SelectHourView = React.createClass({
   render: function() {
     return (
-      <div>
+      <div className="pure-form">
+        <a className="pure-button" onClick={this.choosePrevious} href="#">Edellinen</a>
         <select onChange={this.selectHour} value={this.props.selectedHour}>
           {this.createHourOptions()}
         </select>
+        <a onClick={this.chooseNext} className="pure-button" href="#">Seuraava</a>
       </div>
     );
   },
@@ -24,7 +26,7 @@ var SelectHourView = React.createClass({
 
   createHourOption: function(hour) {
     return (
-      <option value={hour} key={hour}>{hour}</option>
+      <option value={hour} key={hour}>{this.createHourTitle(hour)}</option>
     );
   },
 
@@ -32,6 +34,26 @@ var SelectHourView = React.createClass({
     var hour = event.target.value;
     MeasurementActions.selectHour(hour);
   },
+
+  choosePrevious: function(event) {
+    event.preventDefault();
+    var maxHour = _.last(hours);
+    var currentHour = this.props.selectedHour;
+    var previousHour = currentHour !== 0 ? currentHour - 1 : maxHour;
+    MeasurementActions.selectHour(previousHour);
+  },
+
+  chooseNext: function(event) {
+    event.preventDefault();
+    var maxHour = _.last(hours);
+    var currentHour = this.props.selectedHour;
+    var nextHour = currentHour !== maxHour ? currentHour + 1 : 0;
+    MeasurementActions.selectHour(nextHour);
+  },
+
+  createHourTitle: function(hour) {
+    return hour + ':00';
+  }
 });
 
 module.exports = SelectHourView;

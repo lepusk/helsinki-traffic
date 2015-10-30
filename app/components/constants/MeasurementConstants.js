@@ -18,7 +18,7 @@ var MeasurementConstants = {
     defaultView: {
       lat: 60.182501529929304,
       lon: 24.90523338317871,
-      zoom: 12,
+      zoom: 13,
       minZoom: 10,
       maxZoom: 20
     }
