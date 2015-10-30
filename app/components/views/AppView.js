@@ -4,6 +4,7 @@ var _ = require('lodash');
 
 var SelectHourView = require('./SelectHourView');
 var MapView = require('./MapView');
+var ColorInfoView = require('./ColorInfoView');
 
 var AppView = React.createClass({
   render: function() {
@@ -15,6 +16,7 @@ var AppView = React.createClass({
           coordinates={this.state.coordinates}
           measurementPoints={this.state.measurementPoints} />
         <SelectHourView selectedHour={this.state.selectedHour} />
+        <ColorInfoView />
       </div>
     );
   },

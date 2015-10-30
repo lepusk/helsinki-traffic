@@ -29,3 +29,31 @@
 .next-hour {
   margin-left: 10px;
 }
+
+.color-info {
+  background-color: #fff;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 125px;
+  left: 50px;
+  border: 1px solid #aaa;
+}
+
+.color-info-row {
+  padding: 10px;
+}
+
+.color-info-circle {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  border-radius: 100%;
+  vertical-align: middle;
+}
+
+.color-info-text {
+  display: inline-block;
+  font-size: 10px;
+  padding-left: 10px;
+}
