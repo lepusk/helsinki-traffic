@@ -11,6 +11,14 @@ var MeasurementActions = {
       hour: hour
     });
   },
+
+  selectMeasurementPoint: function(measurementPoint) {
+    console.log('dispatching', MeasurementConstants.Actions.SELECT_MEASUREMENT_POINT, measurementPoint);
+    AppDispatcher.dispatch({
+      actionType: MeasurementConstants.Actions.SELECT_MEASUREMENT_POINT,
+      measurementPoint: measurementPoint
+    });
+  }
 };
 
 module.exports = MeasurementActions;

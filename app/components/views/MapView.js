@@ -3,6 +3,7 @@ var _ = require('lodash');
 var MeasurementQueries = require('../data/MeasurementQueries');
 var MeasurementConstants = require('../constants/MeasurementConstants');
 var MapData = require('../data/MapData');
+var MeasurementActions = require('../actions/MeasurementActions');
 
 var trafficMap;
 var trafficMapPoints;
@@ -45,9 +46,15 @@ var MapView = React.createClass({
       var coordinates = MeasurementQueries.getCoordinates(measurementPoint, self.props.coordinates);
       var circleData = MapData.createCircleData(measurements, coordinates);
 
-      self.drawCircle(circleData.lat, circleData.lon, measurementPointColor, null, defaultCircleSize, measurementPointFillOpacity);
-      self.drawTotalTrafficCircle(circleData.direction1Total, circleData, direction1Color, -circleOffSet);
-      self.drawTotalTrafficCircle(circleData.direction2Total, circleData, direction2Color, circleOffSet);
+      var centerCircle = self.drawCircle(circleData.lat, circleData.lon, measurementPointColor, null, defaultCircleSize, measurementPointFillOpacity);
+      var direction1Circle = self.drawTotalTrafficCircle(circleData.direction1Total, circleData, direction1Color, -circleOffSet);
+      var direction2Circle = self.drawTotalTrafficCircle(circleData.direction2Total, circleData, direction2Color, circleOffSet);
+      var selectMeasurementPoint = function() {
+        MeasurementActions.selectMeasurementPoint(measurementPoint);
+      };
+      centerCircle.on('click', selectMeasurementPoint);
+      direction1Circle.on('click', selectMeasurementPoint);
+      direction2Circle.on('click', selectMeasurementPoint);
     });
   },
 
@@ -71,7 +78,7 @@ var MapView = React.createClass({
 
   drawTotalTrafficCircle: function(totalTraffic, circleData, color, offset) {
     var radius = MapData.getCircleRadius(totalTraffic, this.props.allMeasurements);
-    this.drawCircle(circleData.lat + offset, circleData.lon + offset, color, null, radius);
+    return this.drawCircle(circleData.lat + offset, circleData.lon + offset, color, null, radius);
   },
 
   drawCircle: function(lat, lon, fillColor, borderColor, radius, fillOpacity) {

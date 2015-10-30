@@ -1,6 +1,7 @@
 var MeasurementConstants = {
   Actions: {
-    SELECT_HOUR: 'measurementconstant_select_hour'
+    SELECT_HOUR: 'measurementconstant_select_hour',
+    SELECT_MEASUREMENT_POINT: 'measurementconstant_select_measurement_point'
   },
   Map: {
     circleOffSet: 0.0005,

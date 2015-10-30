@@ -8,6 +8,7 @@ var _ = require('lodash');
 var trafficData = window.trafficData || {};
 var coordinatesData = window.coordinatesData || {};
 var selectedHour = 12;
+var selectedMeasurementPoint;
 
 // var measurementPoints = _.map(coordinatesData, function(coordinate) {
 //   return coordinate.measurementPoint;
@@ -29,6 +30,7 @@ var MeasurementStore = assign({}, EventEmitter.prototype, {
   },
 
   getSelectedHour: function() {
+    console.log('getting selected hour', selectedHour);
     return selectedHour;
   },
 
@@ -40,6 +42,11 @@ var MeasurementStore = assign({}, EventEmitter.prototype, {
   getMeasurementPoints: function() {
     console.log('getting measurement points', measurementPoints);
     return measurementPoints;
+  },
+
+  getSelectedMeasurementPoint: function() {
+    console.log('getting selected measurement point', selectedMeasurementPoint);
+    return selectedMeasurementPoint;
   },
 
   emitChange: function() {
@@ -60,6 +67,10 @@ AppDispatcher.register(function(action) {
   switch(action.actionType) {
     case MeasurementConstants.Actions.SELECT_HOUR:
       selectedHour = action.hour;
+      MeasurementStore.emitChange();
+      break;
+    case MeasurementConstants.Actions.SELECT_MEASUREMENT_POINT:
+      selectedMeasurementPoint = action.measurementPoint;
       MeasurementStore.emitChange();
       break;
     default:

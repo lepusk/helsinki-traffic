@@ -44,7 +44,8 @@ function getAppState() {
     measurementsOfHour: MeasurementStore.getMeasurementsOfHour(),
     selectedHour: MeasurementStore.getSelectedHour(),
     coordinates: MeasurementStore.getCoordinates(),
-    measurementPoints: MeasurementStore.getMeasurementPoints()
+    measurementPoints: MeasurementStore.getMeasurementPoints(),
+    selectedMeasurementPoint: MeasurementStore.getSelectedMeasurementPoint()
   };
 }
 
