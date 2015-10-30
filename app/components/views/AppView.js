@@ -9,12 +9,12 @@ var AppView = React.createClass({
   render: function() {
     return (
       <div className="content">
-        <SelectHourView selectedHour={this.state.selectedHour} />
         <MapView
           allMeasurements={this.state.allMeasurements}
           measurementsOfHour={this.state.measurementsOfHour} 
           coordinates={this.state.coordinates}
           measurementPoints={this.state.measurementPoints} />
+        <SelectHourView selectedHour={this.state.selectedHour} />
       </div>
     );
   },

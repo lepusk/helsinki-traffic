@@ -1,4 +1,31 @@
+.content {
+  position: relative;
+}
+
 .traffic-map {
   height: 100%;
   width: 100%;
+}
+
+.topbar {
+  border: 1px solid #aaa;
+  background-color: #fff;
+  position: fixed;
+  left: 50px;
+  top: 10px;
+  width: 300px;
+  height: 80px;
+  padding: 10px;
+}
+
+.topbar h4 {
+  margin-top: 0;
+}
+
+.previous-hour {
+  margin-right: 10px;
+}
+
+.next-hour {
+  margin-left: 10px;
 }
