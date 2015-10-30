@@ -3,11 +3,16 @@ var MeasurementConstants = require('../constants/MeasurementConstants');
 var MeasurementQueries = require('../data/MeasurementQueries');
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
+var _ = require('lodash');
 
 var trafficData = window.trafficData || {};
 var coordinatesData = window.coordinatesData || {};
 var selectedHour = 12;
-var measurementPoints = ['A01', 'A02', 'A04', 'A05', 'A07', 'A08', 'A09', 'B01', 'B02', 'B03', 'B04',
+
+// var measurementPoints = _.map(coordinatesData, function(coordinate) {
+//   return coordinate.measurementPoint;
+// });
+var measurementPoints =  ['A01', 'A02', 'A04', 'A05', 'A07', 'A08', 'A09', 'B01', 'B02', 'B03', 'B04',
                           'B05', 'B06', 'B07', 'B08', 'B09', 'B10', 'B12', 'C02', 'C03'];
 
 var CHANGE_EVENT = 'change';
