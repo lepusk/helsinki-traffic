@@ -53,7 +53,7 @@ var MeasurementStore = assign({}, EventEmitter.prototype, {
 AppDispatcher.register(function(action) {
   console.log('handling action', action);
   switch(action.actionType) {
-    case MeasurementConstants.SELECT_HOUR:
+    case MeasurementConstants.Actions.SELECT_HOUR:
       selectedHour = action.hour;
       MeasurementStore.emitChange();
       break;

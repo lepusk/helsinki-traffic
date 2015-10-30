@@ -1,10 +1,22 @@
 var React = require('react');
 var _ = require('lodash');
 var MeasurementQueries = require('../data/MeasurementQueries');
+var MeasurementConstants = require('../constants/MeasurementConstants');
 var MapData = require('../data/MapData');
 
 var trafficMap;
 var trafficMapPoints;
+
+var circleOffSet = MeasurementConstants.Map.circleOffSet;
+var direction1Color = MeasurementConstants.Map.direction1Color;
+var direction2Color = MeasurementConstants.Map.direction2Color;
+var cityCenterColor = MeasurementConstants.Map.cityCenterColor;
+var defaultCircleSize = MeasurementConstants.Map.defaultCircleSize;
+var cityCenter = MeasurementConstants.Map.cityCenter;
+var defaultView = MeasurementConstants.Map.defaultView;
+var measurementPointColor = MeasurementConstants.Map.measurementPointColor;
+var defaultFillOpacity = MeasurementConstants.Map.defaultFillOpacity;
+var measurementPointFillOpacity = MeasurementConstants.Map.measurementPointFillOpacity;
 
 var MapView = React.createClass({
   render: function() {
@@ -33,19 +45,19 @@ var MapView = React.createClass({
       var coordinates = MeasurementQueries.getCoordinates(measurementPoint, self.props.coordinates);
       var circleData = MapData.createCircleData(measurements, coordinates);
 
-      self.drawCircle(circleData.lat, circleData.lon, '#aaa', null, 150, 0.5);
-      self.drawTotalTrafficCircle(circleData.direction1Total, circleData, 'red', -0.0005);
-      self.drawTotalTrafficCircle(circleData.direction2Total, circleData, 'blue', 0.0005);
+      self.drawCircle(circleData.lat, circleData.lon, measurementPointColor, null, defaultCircleSize, measurementPointFillOpacity);
+      self.drawTotalTrafficCircle(circleData.direction1Total, circleData, direction1Color, -circleOffSet);
+      self.drawTotalTrafficCircle(circleData.direction2Total, circleData, direction2Color, circleOffSet);
     });
   },
 
   createMap: function() {
-    trafficMap = L.map('traffic-map').setView([60.182501529929304, 24.90523338317871], 12);
+    trafficMap = L.map('traffic-map').setView([defaultView.lat, defaultView.lon], defaultView.zoom);
     L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.{ext}', {
       attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       subdomains: 'abcd',
-      minZoom: 0,
-      maxZoom: 20,
+      minZoom: defaultView.minZoom,
+      maxZoom: defaultView.maxZoom,
       ext: 'png'
     }).addTo(trafficMap);
     trafficMapPoints = new L.LayerGroup().addTo(trafficMap);
@@ -54,7 +66,7 @@ var MapView = React.createClass({
   },
 
   drawCityCenter: function() {
-    this.drawCircle(60.17038939, 24.94100461, 'rgb(145,207,96)', null, 50, 1);
+    this.drawCircle(cityCenter.lat, cityCenter.lon, cityCenterColor, null, defaultCircleSize);
   },
 
   drawTotalTrafficCircle: function(totalTraffic, circleData, color, offset) {
@@ -64,7 +76,7 @@ var MapView = React.createClass({
 
   drawCircle: function(lat, lon, fillColor, borderColor, radius, fillOpacity) {
     if (!fillOpacity) {
-      fillOpacity = 0.8;
+      fillOpacity = defaultFillOpacity;
     }
     var circleRadius = radius;
     var mapOptions = {
