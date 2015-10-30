@@ -11,12 +11,28 @@ function createCircleData(measurements, coordinates) {
   return circleData;
 }
 
+function getCircleRadius(measurementPointTotal, measurements) {
+  var totalMax = getTotalMax(measurements);
+  return (measurementPointTotal / totalMax) * 150;
+}
+
 function getMeasurementByDirection(measurements, direction) {
   return _.find(measurements, function(measurement) {
     return measurement.direction === direction;
   });
 }
 
+function getTotalMax(measurements) {
+  var totalValues = [];
+  _.each(measurements, function(measurementsOfPoint) {
+    totalValues = totalValues.concat(_.map(measurementsOfPoint, function(measurement) {
+      return measurement.total;
+    }));
+  });
+  return _.max(totalValues);
+}
+
 module.exports = {
-  createCircleData: createCircleData
+  createCircleData: createCircleData,
+  getCircleRadius: getCircleRadius
 };

@@ -20,14 +20,22 @@ var MapView = React.createClass({
     this.drawCityCenter();
   },
 
+  componentDidUpdate: function() {
+    this.populateCoordinates();
+    this.drawCityCenter();
+  },
+
   populateCoordinates: function() {
     var self = this;
     trafficMapPoints.clearLayers();
     _.each(this.props.measurementPoints, function(measurementPoint) {
-      var measurements = MeasurementQueries.getMeasurements(measurementPoint, self.props.measurements);
+      var measurements = MeasurementQueries.getMeasurements(measurementPoint, self.props.measurementsOfHour);
       var coordinates = MeasurementQueries.getCoordinates(measurementPoint, self.props.coordinates);
       var circleData = MapData.createCircleData(measurements, coordinates);
-      self.drawCircle(circleData.lat, circleData.lon, 'red', null);
+
+      self.drawCircle(circleData.lat, circleData.lon, '#aaa', null, 150, 0.5);
+      self.drawTotalTrafficCircle(circleData.direction1Total, circleData, 'red', -0.0005);
+      self.drawTotalTrafficCircle(circleData.direction2Total, circleData, 'blue', 0.0005);
     });
   },
 
@@ -46,17 +54,25 @@ var MapView = React.createClass({
   },
 
   drawCityCenter: function() {
-    this.drawCircle(60.17038939, 24.94100461, 'rgb(145,207,96)', null);
+    this.drawCircle(60.17038939, 24.94100461, 'rgb(145,207,96)', null, 50, 1);
   },
 
-  drawCircle: function(lat, lon, fillColor, borderColor) {
-    var circleRadius = 150;
+  drawTotalTrafficCircle: function(totalTraffic, circleData, color, offset) {
+    var radius = MapData.getCircleRadius(totalTraffic, this.props.allMeasurements);
+    this.drawCircle(circleData.lat + offset, circleData.lon + offset, color, null, radius);
+  },
+
+  drawCircle: function(lat, lon, fillColor, borderColor, radius, fillOpacity) {
+    if (!fillOpacity) {
+      fillOpacity = 0.8;
+    }
+    var circleRadius = radius;
     var mapOptions = {
-      fillOpacity: 0.8,
+      fillOpacity: fillOpacity,
       fillColor: fillColor,
       color: borderColor
     };
-    return L.circle([lat, lon], 150, mapOptions).addTo(trafficMapPoints);
+    return L.circle([lat, lon], radius, mapOptions).addTo(trafficMapPoints);
   }
 });
 

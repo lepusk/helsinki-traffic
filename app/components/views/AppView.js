@@ -10,8 +10,9 @@ var AppView = React.createClass({
     return (
       <div className="content">
         <SelectHourView selectedHour={this.state.selectedHour} />
-        <MapView 
-          measurements={this.state.measurements} 
+        <MapView
+          allMeasurements={this.state.allMeasurements}
+          measurementsOfHour={this.state.measurementsOfHour} 
           coordinates={this.state.coordinates}
           measurementPoints={this.state.measurementPoints} />
       </div>
@@ -37,7 +38,8 @@ var AppView = React.createClass({
 
 function getAppState() {
   return {
-    measurements: MeasurementStore.getMeasurementsOfHour(),
+    allMeasurements: MeasurementStore.getAllMeasurements(),
+    measurementsOfHour: MeasurementStore.getMeasurementsOfHour(),
     selectedHour: MeasurementStore.getSelectedHour(),
     coordinates: MeasurementStore.getCoordinates(),
     measurementPoints: MeasurementStore.getMeasurementPoints()

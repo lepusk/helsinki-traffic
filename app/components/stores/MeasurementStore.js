@@ -13,6 +13,10 @@ var measurementPoints = ['A01', 'A02', 'A04', 'A05', 'A07', 'A08', 'A09', 'B01',
 var CHANGE_EVENT = 'change';
 
 var MeasurementStore = assign({}, EventEmitter.prototype, {
+  getAllMeasurements: function() {
+    return trafficData;
+  },
+
   getMeasurementsOfHour: function() {
     var measurementsOfHour = MeasurementQueries.selectMeasurementsByHour(selectedHour, trafficData);
     console.log('fetched measurements', selectedHour, measurementsOfHour);
