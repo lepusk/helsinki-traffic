@@ -3,6 +3,44 @@ var sinon = require("sinon");
 
 var MapData = require('../../components/data/MapData');
 
+describe('create graph data', function() {
+  it('converts measurements to graph values', function() {
+    var measurements = [
+      {
+        "direction": "1",
+        "time": 17,
+        "total": 71
+      },
+      {
+        "direction": "1",
+        "time": 18,
+        "total": 54
+      },
+      {
+        "direction": "1",
+        "time": 19,
+        "total": 99
+      }
+    ];
+    var graphData = MapData.createGraphData(measurements);
+    var expectedGraphData = [
+      {
+        x: 17,
+        y: 71
+      },
+      {
+        x: 18,
+        y: 54
+      },
+      {
+        x: 19,
+        y: 99
+      }
+    ];
+    expect(graphData).to.deep.equals(expectedGraphData);
+  });
+});
+
 describe('create circle data', function() {
   it('creates object with coordinates and total traffic values for each direction', function() {
     var coordinates = {

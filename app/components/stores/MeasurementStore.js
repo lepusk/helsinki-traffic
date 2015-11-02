@@ -73,6 +73,10 @@ AppDispatcher.register(function(action) {
       selectedMeasurementPoint = action.measurementPoint;
       MeasurementStore.emitChange();
       break;
+    case MeasurementConstants.Actions.UNSELECT_MEASUREMENT_POINT:
+      selectedMeasurementPoint = null;
+      MeasurementStore.emitChange();
+      break;
     default:
       console.log('unknown action', action);
   }

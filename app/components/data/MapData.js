@@ -1,4 +1,14 @@
 var _ = require('lodash');
+var MeasurementQueries = require('./MeasurementQueries');
+
+function createGraphData(measurements) {
+  return _.map(measurements, function(measurement) {
+    return {
+      x: measurement.time,
+      y: measurement.total
+    };
+  });
+}
 
 function createCircleData(measurements, coordinates) {
   var circleData = {
@@ -12,7 +22,7 @@ function createCircleData(measurements, coordinates) {
 }
 
 function getCircleRadius(measurementPointTotal, measurements) {
-  var totalMax = getTotalMax(measurements);
+  var totalMax = MeasurementQueries.getTotalMax(measurements);
   return (measurementPointTotal / totalMax) * 150;
 }
 
@@ -22,17 +32,8 @@ function getMeasurementByDirection(measurements, direction) {
   });
 }
 
-function getTotalMax(measurements) {
-  var totalValues = [];
-  _.each(measurements, function(measurementsOfPoint) {
-    totalValues = totalValues.concat(_.map(measurementsOfPoint, function(measurement) {
-      return measurement.total;
-    }));
-  });
-  return _.max(totalValues);
-}
-
 module.exports = {
   createCircleData: createCircleData,
-  getCircleRadius: getCircleRadius
+  getCircleRadius: getCircleRadius,
+  createGraphData: createGraphData
 };

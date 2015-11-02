@@ -18,6 +18,13 @@ var MeasurementActions = {
       actionType: MeasurementConstants.Actions.SELECT_MEASUREMENT_POINT,
       measurementPoint: measurementPoint
     });
+  },
+
+  unselectMeasurementPoint: function() {
+    console.log('dispatching', MeasurementConstants.Actions.UNSELECT_MEASUREMENT_POINT);
+    AppDispatcher.dispatch({
+      actionType: MeasurementConstants.Actions.UNSELECT_MEASUREMENT_POINT
+    });
   }
 };
 

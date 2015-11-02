@@ -3,6 +3,39 @@ var sinon = require("sinon");
 
 var MeasurementQueries = require('../../components/data/MeasurementQueries');
 
+describe('select measurements by measurement point and direction', function() {
+  it('returns only measurements which equals to given measurement point and direction', function() {
+    var measurementPoint = "D10";
+    var direction = '1';
+    var results = MeasurementQueries.getMeasurementsByMeasurementPointAndDirection(measurementPoint, direction, data);
+    var expectedResults = [
+      {
+        "direction": "1",
+        "van": 5,
+        "tram": 13,
+        "car": 65,
+        "time": 17,
+        "truck": 1,
+        "motorcycle": 0,
+        "bus": 0,
+        "total": 71
+      },
+      {
+        "direction": "1",
+        "van": 5,
+        "tram": 6,
+        "car": 49,
+        "time": 18,
+        "truck": 0,
+        "motorcycle": 0,
+        "bus": 0,
+        "total": 54
+      }
+    ];
+    expect(results).to.deep.equals(expectedResults);
+  });  
+});
+
 describe('select measurements by hour', function() {
   it('returns only measurements which equals to given hour', function() {
     var hour = 18;
@@ -59,6 +92,31 @@ describe('get coordinates of measurement point', function() {
       var coordinates = MeasurementQueries.getCoordinates(measurementPoint, coordinatesData);
       expect(coordinates.lat).to.be.undefined;
       expect(coordinates.lon).to.be.undefined;
+    });
+  });
+});
+
+describe('get total max', function() {
+  it('returns highest total value', function() {
+    var max = MeasurementQueries.getTotalMax(data);
+    expect(max).to.equals(372);
+  });
+});
+
+describe('get measurement point name', function() {
+  describe('and measurement point exists', function() {
+    it('returns correct name', function() {
+      var measurementPoint = 'A01';
+      var title = MeasurementQueries.getMeasurementPointName(measurementPoint, coordinatesData);
+      expect(title).to.equals('LAUTTASAAREN SILTA');
+    });
+  });
+
+  describe('and measurement point exists', function() {
+    it('returns null', function() {
+      var measurementPoint = 'A034';
+      var title = MeasurementQueries.getMeasurementPointName(measurementPoint, coordinatesData);
+      expect(title).to.equals(null);
     });
   });
 });
