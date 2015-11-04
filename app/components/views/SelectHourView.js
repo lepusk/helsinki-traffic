@@ -7,8 +7,10 @@ var hours = _.range(0,24);
 var SelectHourView = React.createClass({
   render: function() {
     return (
-      <div className="topbar">
-        <h4>Helsingin liikennemäärät tunnettain</h4>
+      <div className="hour-panel">
+        <h1>Helsingin liikennemäärät tunnettain (2004)
+          <a href="https://www.avoindata.fi/data/fi/dataset/liikennemaarat-helsingissa" target="_blank" className="info-icon">?</a>
+        </h1>
         <div className="pure-form">
           <a className="pure-button previous-hour" onClick={this.choosePrevious} href="#">Edellinen</a>
           <select onChange={this.selectHour} value={this.props.selectedHour}>

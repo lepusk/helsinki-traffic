@@ -6,20 +6,21 @@ var MeasurementConstants = {
   },
   Map: {
     circleOffSet: 0.0005,
-    direction1Color: 'red',
-    direction2Color: 'blue',
-    cityCenterColor: 'rgb(145,207,96)',
-    measurementPointColor: 'black',
-    measurementPointFillOpacity: 0.2,
+    direction1Color: '#5d6c8c',
+    direction2Color: '#e77c4c',
+    cityCenterColor: '#9ab5d9',
+    measurementPointColor: '#859C7E',
+    measurementPointFillOpacity: 0.3,
     defaultCircleSize: 150,
-    defaultFillOpacity: 0.8,
+    cityCenterCircleSize: 75,
+    defaultFillOpacity: 1,
     cityCenter: {
       lat: 60.17038939,
       lon: 24.94100461
     },
     defaultView: {
       lat: 60.182501529929304,
-      lon: 24.90523338317871,
+      lon: 24.94100461,
       zoom: 13,
       minZoom: 10,
       maxZoom: 20

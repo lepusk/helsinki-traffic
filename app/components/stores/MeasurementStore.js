@@ -7,7 +7,7 @@ var _ = require('lodash');
 
 var trafficData = window.trafficData || {};
 var coordinatesData = window.coordinatesData || {};
-var selectedHour = 12;
+var selectedHour = 8;
 var selectedMeasurementPoint;
 
 // var measurementPoints = _.map(coordinatesData, function(coordinate) {

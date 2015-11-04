@@ -9,7 +9,7 @@ var cityCenterColor = MeasurementConstants.Map.cityCenterColor;
 var ColorInfoView = React.createClass({
   render: function() {
     return (
-      <div className="color-info">
+      <div className="color-info-panel">
           <div className="color-info-row">
               <div className="color-info-circle" style={this.createBgStyle(direction1Color)}></div>
               <div className="color-info-text">Liikenne keskustaan</div>

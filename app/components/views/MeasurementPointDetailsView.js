@@ -23,6 +23,8 @@ var MeasurementPointDetailsView = React.createClass({
           <div className="modal-content">
             <a href="#" onClick={this.unselectMeasurementPoint} className="modal-close">x</a>
             <h2>{this.createTitle()}</h2>
+            <p>Vaaka-akseli: Ajankohta (tunti)</p>
+            <p>Pysty-akseli: Ajoneuvojen keskimääräinen kokonaismäärä tuntia kohden.</p>
             <h3>Liikenne keskustaan</h3>
             <LineChartView 
               selectedValue={this.props.selectedHour}

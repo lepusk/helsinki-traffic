@@ -13,6 +13,7 @@ var direction1Color = MeasurementConstants.Map.direction1Color;
 var direction2Color = MeasurementConstants.Map.direction2Color;
 var cityCenterColor = MeasurementConstants.Map.cityCenterColor;
 var defaultCircleSize = MeasurementConstants.Map.defaultCircleSize;
+var cityCenterCircleSize = MeasurementConstants.Map.cityCenterCircleSize;
 var cityCenter = MeasurementConstants.Map.cityCenter;
 var defaultView = MeasurementConstants.Map.defaultView;
 var measurementPointColor = MeasurementConstants.Map.measurementPointColor;
@@ -59,7 +60,7 @@ var MapView = React.createClass({
   },
 
   createMap: function() {
-    trafficMap = L.map('traffic-map').setView([defaultView.lat, defaultView.lon], defaultView.zoom);
+    trafficMap = L.map('traffic-map', { zoomControl: false }).setView([defaultView.lat, defaultView.lon], defaultView.zoom);
     L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.{ext}', {
       attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       subdomains: 'abcd',
@@ -67,13 +68,14 @@ var MapView = React.createClass({
       maxZoom: defaultView.maxZoom,
       ext: 'png'
     }).addTo(trafficMap);
+    new L.Control.Zoom({ position: 'bottomleft' }).addTo(trafficMap);
     trafficMapPoints = new L.LayerGroup().addTo(trafficMap);
 
     console.log('Map initialized', trafficMap, trafficMapPoints);
   },
 
   drawCityCenter: function() {
-    this.drawCircle(cityCenter.lat, cityCenter.lon, cityCenterColor, null, defaultCircleSize);
+    this.drawCircle(cityCenter.lat, cityCenter.lon, cityCenterColor, null, cityCenterCircleSize);
   },
 
   drawTotalTrafficCircle: function(totalTraffic, circleData, color, offset) {
